@@ -60,6 +60,7 @@ You should accept the IP Address and Port number from the command line (Don't us
 *Please make necessary and valid assumptions whenever required.Prototype for command line is as follows:
 
 
-Prototypes for Client and Server
+Prototypes for Client and Server:
+
 Client: <executable code><Server IP Address><Server Port number>
 Serve: <executable code><Server Port number>
