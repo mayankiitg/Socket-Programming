@@ -1,0 +1,72 @@
+Protocol for trading system
+
+- Simple plain text messages are exchanged between client and server.
+- Client sends requests for every action which the user does, and server responds to these.
+
+Client messages (requests)
+--------------------------
+- Fields in the message are separated by newlines (\n)
+- Messages are terminated by special character sequence $%*
+- Common request format:
+    <trader-id>\n
+    <password>\n
+    <request-type>\n
+    <field1>\n
+    <field2>\n
+    .....\n
+    .....\n
+    $%*
+
+- Login details are sent with every request, this way we don't have to implement sessions on the server. Just check them at every request and respond only if they are correct.
+
+-Request Types                  Example
+ * Login request                midhul\n            
+    <trader-id>\n               mypassword\n          
+    <password>\n                LOGIN\n        
+    LOGIN\n                     $%*    
+    $%*
+
+ * Buy request
+    <trader-id>\n
+    <password>\n
+    BUY\n
+    <item-code>\n
+    <qty>\n
+    <unit-price>\n
+    $%*
+
+* Sell request
+    <trader-id>\n
+    <password>\n
+    SELL\n
+    <item-code>\n
+    <qty>\n
+    <unit-price>\n
+    $%*
+
+* View orders
+    <trader-id>\n
+    <password>\n
+    VIEW_ORDERS\n
+    $%*
+
+* View Trades
+    <trader-id>\n
+    <password>\n
+    VIEW_TRADES\n
+    $%*
+
+
+Server Messages (responses)
+---------------------------
+
+- First lime should contain status (SUCCESS or FAIL)
+- Following lines contain content which will be displayed as it is to the user by the client :P
+- Common response format
+    <status>\n
+    <content>
+
+- Responses should be given to each type of login request mentioned above
+ -Example response for login request:  
+    SUCCESS\n
+    Successfully logged in!
